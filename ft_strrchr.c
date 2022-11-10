@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-char *ft_strrchr(const char *str, int c)
+char	*ft_strrchr(const char *str, int c)
 {
 	char	*arr;
 	int		len;
@@ -22,10 +22,10 @@ char *ft_strrchr(const char *str, int c)
 	while (*arr != c && len >= 0)
 	{
 		len--;
-		if(len == -1)
+		if (len == -1)
 			*arr = '\0';
 		else
-			*arr--;
+			*arr = *arr - 1;
 	}
-	return arr;
+	return (arr);
 }

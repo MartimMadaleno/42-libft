@@ -20,8 +20,8 @@ char	*ft_strchr(const char *str, int c)
 	arr = (char *)str;
 	while (*arr)
 	{
-		if(*arr == c)
-			break;
+		if (*arr == c)
+			break ;
 		arr++;
 	}
 	return (arr);

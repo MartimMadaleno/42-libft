@@ -12,44 +12,39 @@
 
 #include "libft.h"
 
-int	getNumLen(int n)
+static int	get_num_len(long n)
 {
-	if(n == INT_MIN)
-		return (getNumLen(147483648) + 2);
-	else if(n < 0)
-		return (getNumLen(n * -1) + 1);
-	else if(n > 9)
-		return (getNumLen(n / 10) + 1);
+	if (n < 0)
+		return (get_num_len(n * -1) + 1);
+	else if (n > 9)
+		return (get_num_len(n / 10) + 1);
 	else
 		return (1);
 }
 
 char	*ft_itoa(int n)
 {
-	int numLen;
-	char *p;
+	int		num_len;
+	char	*p;
+	long	newn;
 
-	numLen = getNumLen(n);
-	if (!(p = calloc(sizeof(char), numLen + 1)))
-		return (0);
-	if(n == 0)
+	newn = n;
+	num_len = get_num_len(newn);
+	p = ft_calloc(sizeof(char), num_len + 1);
+	if (!p)
+		return (NULL);
+	if (newn == 0)
 		*p = '0';
-	if(n == INT_MIN)
+	if (newn < 0)
 	{
 		*p = '-';
-		p[numLen -= 1] = '8';
-		n = 214748364;
+		newn *= -1;
 	}
-	if (n < 0)
+	while (newn > 0)
 	{
-		*p = '-';
-		n *= -1;
-	}
-	while (n > 0)
-	{
-		numLen--;
-		p[numLen] = (n % 10) + '0';
-		n /= 10;
+		num_len--;
+		p[num_len] = (newn % 10) + '0';
+		newn /= 10;
 	}
 	return (p);
 }

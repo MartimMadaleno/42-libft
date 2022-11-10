@@ -11,67 +11,74 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
-int wordCount(const char *s, char c)
+static int	word_count(const char *s, char c)
 {
-	int count;
+	int	count;
 
 	count = 0;
-	while(*s)
+	while (*s)
 	{
-		while(*s == c && *s)
+		while (*s == c && *s)
 			s++;
-		if(*s)
+		if (*s)
 			count++;
-		while(*s != c && *s)
+		while (*s != c && *s)
 			s++;
 	}
-	
-	return count;
+	return (count);
 }
 
-int getWordLen(const char *s, char c)
+static int	get_word_len(const char *s, char c)
 {
-	int count;
+	int	count;
 
 	count = 0;
-	while(*s != c && *s)
+	while (*s != c && *s)
 	{
 		s++;
 		count++;
 	}
-	return count;
+	return (count);
+}
+
+static int	pass_s(const char *s, char c, char **words, int words_i)
+{
+	int	i;
+
+	i = 0;
+	while (*s != c && *s)
+	{
+		words[words_i][i] = *s;
+		i++;
+		s++;
+	}
+	return (i);
 }
 
 char	**ft_split(const char *s, char c)
 {
-	int wordsNum;
-	char **words;
-	int words_I;
-	int i;
+	char	**words;
+	int		words_i;
+	int		words_num;
 
-	wordsNum = wordCount(s, c);
-	words = malloc(sizeof(char *) * (wordsNum + 1) );
-	if(!words)
-		return 0;
-	words_I = 0;
-	while(*s)
+	words_num = word_count(s, c);
+	words = ft_calloc((words_num + 1), sizeof(char *));
+	if (!words)
+		return (NULL);
+	words_i = 0;
+	while (*s)
 	{
-		while(*s == c && *s)
+		while (*s == c && *s)
 			s++;
-		if(*s)
-			words[words_I] = malloc(sizeof(char) * (getWordLen(s, c) + 1));
-		i = 0;
-		while(*s != c && *s)
+		if (*s)
 		{
-			words[words_I][i] = *s;
-			i++;
-			s++;
+			words[words_i] = ft_calloc((get_word_len(s, c) + 1), sizeof(char));
+			if (!words[words_i])
+				return (0);
 		}
-		words[words_I][i] = '\0';
-		words_I++;
+		s += pass_s(s, c, words, words_i);
+		words_i++;
 	}
-	words[wordsNum] = '\0';
-	return words;
+	return (words);
 }
