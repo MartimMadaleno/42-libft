@@ -14,10 +14,27 @@
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	ft_putstr_fd(ft_itoa(n), fd);
+	if (n <= INT_MAX && n >= INT_MIN)
+	{
+		if (n == INT_MIN)
+		{
+			ft_putchar_fd('-', fd);
+			ft_putchar_fd('2', fd);
+			ft_putnbr_fd(147483648, fd);
+		}
+		else if (n < 0)
+		{
+			ft_putchar_fd('-', fd);
+			ft_putnbr_fd(-n, fd);
+		}
+		else if (n > 9)
+		{
+			ft_putnbr_fd(n / 10, fd);
+			ft_putnbr_fd(n % 10, fd);
+		}
+		else
+		{
+			ft_putchar_fd(n + '0', fd);
+		}
+	}
 }
-
-// int main()
-// {
-// 	ft_putnbr_fd(-131555, 1);
-// }

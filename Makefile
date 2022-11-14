@@ -9,7 +9,7 @@ ft_strmapi ft_striteri ft_itoa ft_split\
 BONUS = ft_lstnew ft_lstadd_front ft_lstsize ft_lstlast ft_lstadd_back\
 ft_lstdelone ft_lstclear ft_lstmap ft_lstiter\
 
-CC =gcc
+CC = gcc
 RM =rm -f
 CFLAGS = -Wall -Werror -Wextra -I.
 
