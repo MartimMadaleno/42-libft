@@ -12,40 +12,16 @@
 
 #include "libft.h"
 
-int	get_to_rm(const char *s1, const char *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	int	count;
+	size_t	len;
 
-	count = 0;
-	while (*s1)
-	{
-		if ((*ft_strchr(set, *s1)))
-			count++;
+	if (!s1 || !set)
+		return (0);
+	while (*s1 && ft_strchr(set, *s1))
 		s1++;
-	}
-	return (count);
-}
-
-char	*ft_strtrim(const char *s1, const char *set)
-{
-	size_t	new_len;
-	char	*p;
-	int		i;
-
-	new_len = ft_strlen(s1) - get_to_rm(s1, set) + 1;
-	p = malloc(sizeof(char) * new_len);
-	if (!p)
-		return (NULL);
-	i = 0;
-	while (*s1)
-	{
-		if (!(*ft_strchr(set, *s1)))
-		{
-			p[i] = *s1;
-			i++;
-		}
-		s1++;
-	}
-	p[new_len - 1] = '\0';
-	return (p);
+	len = ft_strlen(s1);
+	while (len && ft_strchr(set, s1[len]))
+		len--;
+	return (ft_substr(s1, 0, len + 1));
 }

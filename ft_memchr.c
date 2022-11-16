@@ -17,11 +17,15 @@ void	*ft_memchr(const void *str, int c, size_t n)
 	size_t	i;
 
 	i = 0;
+	if (n == 0)
+		return (NULL);
+	if (c == 0)
+		return (s1 + ft_strlen((char const *)s1));
 	while (i < n)
 	{
 		if (((char *)str)[i] == (char)c)
 			return ((char *)(str + i));
 		i++;
 	}
-	return (0);
+	return (NULL);
 }
