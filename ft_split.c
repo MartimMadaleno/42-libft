@@ -80,6 +80,5 @@ char	**ft_split(const char *s, char c)
 		s += pass_s(s, c, words, words_i);
 		words_i++;
 	}
-	words[words_i] = NULL;
 	return (words);
 }

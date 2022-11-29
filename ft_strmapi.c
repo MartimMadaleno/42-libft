@@ -29,15 +29,3 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	p[i] = '\0';
 	return (p);
 }
-
-// char func(unsigned int i, char c)
-// {
-// 	return c + 1;
-// }
-
-// #include <stdio.h>
-
-// int main()
-// {
-// 	printf("%s\n",ft_strmapi("ABC abc", &func));
-// }
